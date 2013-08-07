@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render_to_response
@@ -6,6 +6,7 @@ from users.models import Employee
 import datetime
 import getpass
 from django.db import connection
+from django.contrib import auth
 def index(request):
 	context = {}
 	u_name = getpass.getuser()
@@ -16,10 +17,13 @@ def index(request):
 	else:
 		host_ip = request.META['REMOTE_ADDR']
 	user_name = Employee.objects.get(ip=host_ip).nickname
-	if Employee.objects.get(ip=host_ip).password:
-		return render_to_response('index.html', {'user_name': user_name})
+	if request.user.is_authenticated():
+		return HttpResponseRedirect("/user/")
 	else:
-		return render_to_response('register.html', {'user_name': user_name})
+		if Employee.objects.get(ip=host_ip).password:
+			return render_to_response('index.html', {'user_name': user_name})
+		else:
+			return render_to_response('register.html', {'user_name': user_name})
 # def login(request):
 # 	return render_to_response('login.html',)
 # def login(request):

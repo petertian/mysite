@@ -36,4 +36,5 @@ urlpatterns += patterns('mysite.views',
 urlpatterns += patterns('users.views',
     (r'^user/login/$', 'login'),
     (r'^user/register/$', 'register'),                  #register
+    (r'^user/$', 'user_view'),
 )

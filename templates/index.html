@@ -14,8 +14,9 @@
 			$('#tips').html('You need a password !');
 		}else{
 			$.post('/user/login/',{'username':username,'password':password},function(data){
+				console.log(data);
 				if(data == 'ok'){
-					location.href = "/"
+					location.href = "/user/"
 				}else{
 					$('#tips').html('Wrong password !');
 				}
