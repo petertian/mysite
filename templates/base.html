@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+	<link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+	{% block content %}
+	{% endblock %}
+	{% block footer %}
+	<div style="color:#FFF;">
+		<i>Powed by Python!</i>
+		<i>Copyright 2013</i>
+	</div>
+	{% endblock %}
+	<script type="text/javascript" src="/js/jquery.js"></script>
+</body>
+</html>

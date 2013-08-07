@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+	首页
+{% endblock %}
+
+{% block content %}
+<!--[if IE]> <style> #login{ background:#0090C7; } </style> <![endif]-->
+<script>
+	function _submit(){
+		var username = $('#username').html();
+		var password = $('#password').val();
+		if(password == ""){
+			$('#tips').html('You need a password !');
+		}else{
+			$.post('/user/login/',{'username':username,'password':password},function(data){
+				if(data == 'ok'){
+					location.href = "/"
+				}else{
+					$('#tips').html('Wrong password !');
+				}
+			});
+		}
+	}
+</script>
+<div style="width:100%;height:100%;">
+	<div id="login-wrapper">
+		<h3 style="color:#FFF;margin-bottom:20px;">欢迎回来</h3>
+		<ul class="login-ul">
+		<span id="tips" style="color:#FFF;"></span>
+		<li class="input user"><label style="color:#FFF;"><b>Hello</b> <span id="username">{{ user_name }}</span> ~</label><input value="" disabled="disabled"></li>
+		<li class="input pwd"><input value="" placeholder="password：" id="password" type="password"/><i class="icon-lock icon-1x"></i></li>
+		<button id="submit" type="submit" onclick="_submit()">Login</button>
+		</ul>
+	</div>
+</div>
+{% endblock %}
