@@ -1,5 +1,4 @@
 # Django settings for mysite project.
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -28,11 +27,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 SITE_ID = 1
 
@@ -97,7 +96,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -108,7 +107,7 @@ import os.path
 
 TEMPLATE_DIRS = (
     # os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
-    "D:/peter/mysite/templates",
+    os.path.abspath("templates")
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     

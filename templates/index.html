@@ -5,34 +5,53 @@
 {% endblock %}
 
 {% block content %}
-<!--[if IE]> <style> #login{ background:#0090C7; } </style> <![endif]-->
 <script>
-	function _submit(){
-		var username = $('#username').html();
-		var password = $('#password').val();
-		if(password == ""){
-			$('#tips').html('You need a password !');
-		}else{
-			$.post('/user/login/',{'username':username,'password':password},function(data){
-				console.log(data);
-				if(data == 'ok'){
-					location.href = "/user/"
-				}else{
-					$('#tips').html('Wrong password !');
-				}
-			});
-		}
+	$(function(){
+		$(window).resize(function(){
+	        $('#home-pics img').css({
+	            left: ($(window).width() - $('#home-pics img').outerWidth())/ 2,
+	            top: ($(window).height() - $('#home-pics img').outerHeight())/ 2
+	        });
+	    });
+
+	});
+	// function _submit(){
+	// 	var username = $('#username').val();
+	// 	var password = $('#password').val();
+	// 	if(password == ""){
+	// 		$('#loginTip').html('You need a password !').show();
+	// 	}else{
+	// 		$.post('/user/login/',{'username':username,'password':password},function(data){
+	// 			if(data == 'ok'){
+	// 				location.href = "/user/login"
+	// 			}else{
+	// 				$('#loginTip').html('Wrong password !').show();
+	// 			}
+	// 		});
+	// 	}
+	// }
+	function set_img(){
+	    var i_left = ($(window).width() - $('#home-pics img:last-child').outerWidth())/ 2;
+	    var i_top = ($(window).height() - $('#home-pics img:last-child').outerHeight())/ 2;
+	    $('#home-pics img:last-child').css({
+	        left: i_left,
+	        top: i_top
+	    });
 	}
 </script>
-<div style="width:100%;height:100%;">
-	<div id="login-wrapper">
-		<h3 style="color:#FFF;margin-bottom:20px;">欢迎回来</h3>
-		<ul class="login-ul">
-		<span id="tips" style="color:#FFF;"></span>
-		<li class="input user"><label style="color:#FFF;"><b>Hello</b> <span id="username">{{ user_name }}</span> ~</label><input value="" disabled="disabled"></li>
-		<li class="input pwd"><input value="" placeholder="password：" id="password" type="password"/><i class="icon-lock icon-1x"></i></li>
-		<button id="submit" type="submit" onclick="_submit()">Login</button>
-		</ul>
-	</div>
+<div id="home-pics">
+    <img src="/static/image/slider_pic_9.jpg" onload="set_img()"/>
+</div>
+<div id="home-right">
+	<section id="login-wrapper">
+		<form id="loginform" method="POST" action="">
+			{% csrf_token %}
+			<h2>欢迎回来</h2>
+	 		<div class="login-container"><input id="username" type="text"  disabled="disabled" value="{{ user_name }}" class="disabledinput b"><i class="icon-user color999"></i></div>
+	 		<span class="dn" id="loginTip">Tip:</span>
+			<div class="login-container"><input id="password" type="password" autofocus class="normalinput" placeholder="password:"><i class="icon-lock"></i></div>
+	    	<input name="" type="submit" class="login-btn" value="LOGIN"/>
+		</form>
+	</section>	
 </div>
 {% endblock %}
